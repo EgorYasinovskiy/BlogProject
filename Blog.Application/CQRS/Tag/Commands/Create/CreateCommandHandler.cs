@@ -1,4 +1,4 @@
-﻿using Blog.Application.Contract.Exceptions;
+﻿using Blog.Application.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +18,7 @@ namespace Blog.Application.CQRS.Tag.Commands.Create
 			if (tag != null)
 				throw new EntityDoublicateException(nameof(Model.Tag), tag.Id);
 			tag = new Model.Tag() { Id = Guid.NewGuid(), Name = request.Name };
-			var result = await _dataContext.Tags.AddAsync(tag,cancellationToken);
+			var result = await _dataContext.Tags.AddAsync(tag, cancellationToken);
 			await _dataContext.SaveChangesAsync(cancellationToken);
 			return result.Entity.Id;
 		}

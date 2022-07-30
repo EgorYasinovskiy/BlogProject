@@ -1,4 +1,4 @@
-﻿using Blog.Application.Contract.Exceptions;
+﻿using Blog.Application.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +15,7 @@ namespace Blog.Application.CQRS.Tag.Commands.Delete
 
 		public async Task<Unit> Handle(DeleteCommand request, CancellationToken cancellationToken)
 		{
-			var tag = await _dataContext.Tags.FirstOrDefaultAsync(x => x.Id == request.Id,cancellationToken);
+			var tag = await _dataContext.Tags.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 			if (tag == null)
 				throw new EntityNotFoundException(nameof(Model.Tag), request.Id);
 			_dataContext.Tags.Remove(tag);
