@@ -1,17 +1,26 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Blog.Application.Contract.Exceptions;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.CQRS.Tag.Commands.Delete
 {
 	public class DeleteCommandHandler : IRequestHandler<DeleteCommand>
 	{
-		public Task<Unit> Handle(DeleteCommand request, CancellationToken cancellationToken)
+		private readonly IDataContext _dataContext;
+
+		public DeleteCommandHandler(IDataContext context)
 		{
-			throw new NotImplementedException();
+			_dataContext = context;
+		}
+
+		public async Task<Unit> Handle(DeleteCommand request, CancellationToken cancellationToken)
+		{
+			var tag = await _dataContext.Tags.FirstOrDefaultAsync(x => x.Id == request.Id,cancellationToken);
+			if (tag == null)
+				throw new EntityNotFoundException(nameof(Model.Tag), request.Id);
+			_dataContext.Tags.Remove(tag);
+			await _dataContext.SaveChangesAsync(cancellationToken);
+			return Unit.Value;
 		}
 	}
 }
