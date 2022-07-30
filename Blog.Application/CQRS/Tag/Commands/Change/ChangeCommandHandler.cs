@@ -1,17 +1,26 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Blog.Application.Contract.Exceptions;
+using MediatR;
 
 namespace Blog.Application.CQRS.Tag.Commands.Change
 {
 	public class ChangeCommandHandler : IRequestHandler<ChangeCommand>
 	{
-		public Task<Unit> Handle(ChangeCommand request, CancellationToken cancellationToken)
+		private readonly IDataContext _dataContext;
+
+		public ChangeCommandHandler(IDataContext dataContext)
 		{
-			throw new NotImplementedException();
+			_dataContext = dataContext;
+		}
+
+		public async Task<Unit> Handle(ChangeCommand request, CancellationToken cancellationToken)
+		{
+			var tag = await _dataContext.Tags.FindAsync(request.TagId,cancellationToken);
+			if (tag == null)
+				throw new EntityNotFoundException(nameof(Model.Tag), request.TagId);
+			tag.Name = request.NewName;
+			await _dataContext.SaveChangesAsync(cancellationToken);
+
+			return Unit.Value;
 		}
 	}
 }
