@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Blog.Application.Contract.Interfaces;
+using Blog.Application.Mappings.Converters;
 
 namespace Blog.Application.Mappings.DTO
 {
@@ -15,10 +16,7 @@ namespace Blog.Application.Mappings.DTO
 		public void Mapping(Profile profile)
 		{
 			profile.CreateMap<Model.PostItem, PostViewModel>()
-				.ForMember(vm => Title, opt => opt.MapFrom(mod => mod.Title))
-				.ForMember(vm => Id, opt => opt.MapFrom(mod => mod.Id))
-				.ForMember(vm => MarkDown, opt => opt.MapFrom(mod => mod.MarkDown))
-				.ForMember(vm => Comments, opt => opt.MapFrom(mod => ));
+				.ConvertUsing<PostToPostViewModelTypeConverter>();
 		}
 	}
 }
