@@ -2,6 +2,6 @@
 {
 	public class TagListViewModel
 	{
-		public IList<TagViewModel> Tags { get; set; }
+		public ICollection<TagViewModel> Tags { get; set; }
 	}
 }
