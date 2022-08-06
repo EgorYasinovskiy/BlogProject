@@ -18,7 +18,7 @@ namespace Blog.Application.CQRS.Post.Requests.Get
 		}
 		public async Task<PostViewModel> Handle(GetRequest request, CancellationToken cancellationToken)
 		{
-			var post = await _dataContext.Posts.FirstOrDefaultAsync(x => x.Id == request.ID,cancellationToken);
+			var post = await _dataContext.Posts.FirstOrDefaultAsync(x => x.Id == request.ID, cancellationToken);
 			if (post == null)
 				throw new EntityNotFoundException(nameof(Model.PostItem), request.ID);
 			var dto = _mapper.Map<PostViewModel>(post);

@@ -19,7 +19,7 @@ namespace Blog.Application.CQRS.Post.Requests.GetByTag
 		public async Task<PostListViewModel> Handle(GetByTagRequest request, CancellationToken cancellationToken)
 		{
 			var posts = await _dataContext.Posts
-				.Where(x=>x.Tags.Any(y=>y.Id==request.TagId))
+				.Where(x => x.Tags.Any(y => y.Id == request.TagId))
 				.ProjectTo<PostListItemViewModel>(_mapper.ConfigurationProvider)
 				.ToListAsync(cancellationToken);
 			return new PostListViewModel() { Posts = posts };
