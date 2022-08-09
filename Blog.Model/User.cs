@@ -3,6 +3,7 @@
 	public class User
 	{
 		public Guid ID { get; set; }
+		public UserRole Role { get; set; }
 		public string Username { get; set; }
 		public string Email { get; set; }
 		public bool Gender { get; set; }
