@@ -22,6 +22,8 @@ namespace Blog.Application.CQRS.Post.Commands.Delete
 			var post = await _context.Posts.FindAsync(request.PostId, cancellationToken);
 			if (post == null)
 				throw new EntityNotFoundException(nameof(Model.PostItem), request.PostId);
+			if (post.AuthorId != request.CurrentUserId)
+				throw NoRightsGenerator.DeleteException(request.PostId, request.CurrentUserId);
 			_context.Posts.Remove(post);
 			await _context.SaveChangesAsync();
 			return Unit.Value;

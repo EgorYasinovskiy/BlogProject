@@ -29,6 +29,10 @@ namespace Blog.Application.CQRS.Post.Commands.Create
 				Tags = await tags.ToListAsync()
 			};
 			await _context.Posts.AddAsync(post, cancellationToken);
+			post = await _context.Posts
+				.Include(x => x.Author)
+				.FirstAsync(x => x.Id == post.Id,cancellationToken);
+
 			return _mapper.Map<PostViewModel>(post);
 		}
 	}
