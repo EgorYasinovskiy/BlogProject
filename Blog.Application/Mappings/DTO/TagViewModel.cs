@@ -12,7 +12,7 @@ namespace Blog.Application.Mappings.DTO
 		{
 			profile.CreateMap<Model.Tag, TagViewModel>()
 				.ForMember(vm => vm.Name, opt => opt.MapFrom(mod => mod.Name))
-				.ForMember(vm => vm.Id, opt => opt.MapFrom(mod => mod.Id);
+				.ForMember(vm => vm.Id, opt => opt.MapFrom(mod => mod.Id));
 		}
 	}
 }
