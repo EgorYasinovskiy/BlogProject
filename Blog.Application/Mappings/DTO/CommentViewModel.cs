@@ -13,7 +13,7 @@ namespace Blog.Application.Mappings.DTO
 		public void Mapping(Profile profile)
 		{
 			profile.CreateMap<Model.Comment, CommentViewModel>()
-				.ForMember(vm=>vm.UserName,opt=>opt.MapFrom(mod=>mod.Id))
+				.ForMember(vm=>vm.Id,opt=>opt.MapFrom(mod=>mod.Id))
 				.ForMember(vm => vm.UserName, opt => opt.MapFrom(mod => mod.Author.UserName))
 				.ForMember(vm => vm.Comment, opt => opt.MapFrom(mod => mod.Text))
 				.ForMember(vm => vm.Created, opt => opt.MapFrom(mod => mod.Created));

@@ -1,0 +1,25 @@
+﻿using Blog.IdentityServer4.Model;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Blog.IdentityServer4.Controllers
+{
+	[Route("api/[controller]")]
+	[ApiController]
+	public class AuthController : ControllerBase
+	{
+		private readonly Microsoft.AspNetCore.Identity.UserManager<BlogUser> _userManager;
+		private readonly Microsoft.AspNetCore.Identity.RoleManager<BlogUserRole> _roleManager;
+
+		public AuthController(UserManager<BlogUser> _userManager, RoleManager<BlogUserRole> _roleManager)
+		{
+			this._userManager = _userManager;
+			this._roleManager = _roleManager;
+		}
+		public IActionResult Register()
+		{
+			throw new NotImplementedException();
+		}
+	}
+}

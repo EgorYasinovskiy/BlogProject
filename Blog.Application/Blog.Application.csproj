@@ -12,6 +12,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blog.Model\Blog.Model.csproj" />
+    <ProjectReference Include="..\Blog.MQContract\Blog.MQContract.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CQRS\User\Requests\" />
   </ItemGroup>
 
 </Project>
