@@ -17,7 +17,7 @@ namespace Blog.Application.CQRS.Comment.Commands.Change
 		}
 		public async Task<CommentViewModel> Handle(ChangeCommand request, CancellationToken cancellationToken)
 		{
-			var comment = await _context.Comments.FindAsync(request.Id,cancellationToken);
+			var comment = await _context.Comments.FindAsync(request.Id, cancellationToken);
 
 			if (comment == null)
 				throw new EntityNotFoundException(nameof(Model.Comment), request.Id);

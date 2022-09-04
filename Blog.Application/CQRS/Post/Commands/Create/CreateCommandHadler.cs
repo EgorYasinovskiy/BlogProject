@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.CQRS.Post.Commands.Create
 {
-	public class CreateCommandHadler : IRequestHandler<CreateCommand,PostViewModel>
+	public class CreateCommandHadler : IRequestHandler<CreateCommand, PostViewModel>
 	{
 		private readonly IDataContext _context;
 		private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ namespace Blog.Application.CQRS.Post.Commands.Create
 
 		public async Task<PostViewModel> Handle(CreateCommand request, CancellationToken cancellationToken)
 		{
-			var tagsSet = request.Tags.Select(x=>x.ToLower()).ToHashSet();
+			var tagsSet = request.Tags.Select(x => x.ToLower()).ToHashSet();
 			var tags = _context.Tags.Where(x => tagsSet.Contains(x.Name.ToLower()));
 			var post = new PostItem()
 			{
@@ -31,7 +31,7 @@ namespace Blog.Application.CQRS.Post.Commands.Create
 			await _context.Posts.AddAsync(post, cancellationToken);
 			post = await _context.Posts
 				.Include(x => x.Author)
-				.FirstAsync(x => x.Id == post.Id,cancellationToken);
+				.FirstAsync(x => x.Id == post.Id, cancellationToken);
 
 			return _mapper.Map<PostViewModel>(post);
 		}

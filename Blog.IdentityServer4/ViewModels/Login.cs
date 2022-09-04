@@ -8,7 +8,7 @@ namespace Blog.IdentityServer4.ViewModels
 		[EmailAddress(ErrorMessage = "That's not correct e-mail address!")]
 		[DataType(DataType.EmailAddress)]
 		public string Email { get; set; }
-		[Required(AllowEmptyStrings = false,ErrorMessage = $"{nameof(Password)} can't be empty!")]
+		[Required(AllowEmptyStrings = false, ErrorMessage = $"{nameof(Password)} can't be empty!")]
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
 	}

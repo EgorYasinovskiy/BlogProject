@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.CQRS.Comment.Commands.Create
 {
-	public class CreateCommandHandler : IRequestHandler<CreateCommand,CommentViewModel>
+	public class CreateCommandHandler : IRequestHandler<CreateCommand, CommentViewModel>
 	{
 		private readonly IDataContext _context;
 		private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace Blog.Application.CQRS.Comment.Commands.Create
 		public async Task<CommentViewModel> Handle(CreateCommand request, CancellationToken cancellationToken)
 		{
 			Model.PostItem post;
-			if ((post = await _context.Posts.FindAsync(request.PostId,cancellationToken)) == null)
+			if ((post = await _context.Posts.FindAsync(request.PostId, cancellationToken)) == null)
 				throw new EntityNotFoundException(nameof(Model.PostItem), request.PostId);
 
 			var comment = new Model.Comment()

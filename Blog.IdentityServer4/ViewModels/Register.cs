@@ -1,5 +1,4 @@
-﻿using IdentityServer4.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Blog.IdentityServer4.ViewModels
 {
@@ -15,7 +14,7 @@ namespace Blog.IdentityServer4.ViewModels
 		[DataType(DataType.Password)]
 		[Compare(otherProperty: "Password", ErrorMessage = "Passwords does not match!")]
 		public string ConfirmPassword { get; set; }
-		[Required(AllowEmptyStrings = false,ErrorMessage ="Please, write your first name here!")]
+		[Required(AllowEmptyStrings = false, ErrorMessage = "Please, write your first name here!")]
 		public string FirstName { get; set; }
 		[Required(AllowEmptyStrings = false, ErrorMessage = "Please, write your last name here!")]
 		public string LastName { get; set; }

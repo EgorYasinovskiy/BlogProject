@@ -1,6 +1,5 @@
 ﻿using Blog.Application.Exceptions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Application.CQRS.Tag.Commands.Delete
 {

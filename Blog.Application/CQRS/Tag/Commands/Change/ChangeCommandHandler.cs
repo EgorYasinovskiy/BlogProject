@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Blog.Application.CQRS.Tag.Commands.Change
 {
-	public class ChangeCommandHandler : IRequestHandler<ChangeCommand,TagViewModel>
+	public class ChangeCommandHandler : IRequestHandler<ChangeCommand, TagViewModel>
 	{
 		private readonly IDataContext _dataContext;
 		private readonly IMapper _mapper;

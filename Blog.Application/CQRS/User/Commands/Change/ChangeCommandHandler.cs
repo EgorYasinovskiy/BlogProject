@@ -14,7 +14,7 @@ namespace Blog.Application.CQRS.User.Commands.Change
 
 		public async Task<Unit> Handle(ChangeCommand request, CancellationToken cancellationToken)
 		{
-			var user = await _context.Users.FindAsync(request.UserChange.Id,cancellationToken);
+			var user = await _context.Users.FindAsync(request.UserChange.Id, cancellationToken);
 			if (user == null)
 				throw new EntityNotFoundException(nameof(Model.User), request.UserChange.Id);
 

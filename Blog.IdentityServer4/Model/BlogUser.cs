@@ -4,6 +4,6 @@ namespace Blog.IdentityServer4.Model
 {
     public class BlogUser : IdentityUser<Guid>
     {
-        
+
     }
 }

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace Blog.Contract
+﻿namespace Blog.Contract
 {
 	public interface IMapWith<T>
 	{

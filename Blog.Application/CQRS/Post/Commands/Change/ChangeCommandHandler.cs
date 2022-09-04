@@ -11,7 +11,7 @@ namespace Blog.Application.CQRS.Post.Commands.Change
 		private readonly IDataContext _context;
 		private readonly IMapper _mapper;
 
-		public ChangeCommandHandler(IDataContext context,IMapper mapper)
+		public ChangeCommandHandler(IDataContext context, IMapper mapper)
 		{
 			_context = context;
 			_mapper = mapper;
@@ -20,11 +20,11 @@ namespace Blog.Application.CQRS.Post.Commands.Change
 		public async Task<PostViewModel> Handle(ChangeCommand request, CancellationToken cancellationToken)
 		{
 			var post = await _context.Posts
-				.Include(x=>x.Author)
-				.Include(x=>x.Tags)
-				.Include(x=>x.Likes)
-				.Include(x=>x.Comments)
-				.FirstAsync(x=>x.Id == request.Id, cancellationToken);
+				.Include(x => x.Author)
+				.Include(x => x.Tags)
+				.Include(x => x.Likes)
+				.Include(x => x.Comments)
+				.FirstAsync(x => x.Id == request.Id, cancellationToken);
 
 			if (post == null)
 				throw new EntityNotFoundException(nameof(Model.PostItem), request.Id);
@@ -35,7 +35,7 @@ namespace Blog.Application.CQRS.Post.Commands.Change
 			post.Title = request.Title;
 			post.MarkDown = request.MarkDown;
 
-			var tagsSet = request.Tags.Select(x=>x.ToLower()).ToHashSet();
+			var tagsSet = request.Tags.Select(x => x.ToLower()).ToHashSet();
 			var tags = await _context.Tags.
 				Where(x => tagsSet.Contains(x.Name.ToLower()))
 				.ToListAsync(cancellationToken);
